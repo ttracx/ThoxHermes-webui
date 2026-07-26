@@ -58,7 +58,19 @@ jobs:
           pwsh -NoLogo -NoProfile -Command '$tokens = $null; $errors = $null; [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path "thox/start-thox.ps1"), [ref]$tokens, [ref]$errors) | Out-Null; if ($errors.Count -gt 0) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }'
 
       - name: Run THOX contract tests
-        run: python -m pytest tests/test_thox_suite.py -q
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m pytest tests/test_thox_suite.py -q --tb=short 2>&1 | tee thox-test-report.txt
+
+      - name: Upload THOX test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: thox-test-report
+          path: thox-test-report.txt
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Validate gateway JavaScript
         working-directory: thox/vercel
