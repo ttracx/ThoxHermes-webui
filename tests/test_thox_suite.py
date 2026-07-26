@@ -25,7 +25,7 @@ def test_required_thox_assets_exist() -> None:
     required = [
         EXTENSION / "manifest.json",
         EXTENSION / "thox-brand.css",
-        EXTENSION / "thox-brand.js",
+        EXTENSION / "thox-app.js",
         EXTENSION / "thox-launch-context.js",
         EXTENSION / "assets" / "thox-mark.svg",
         EXTENSION / "assets" / "manifest.webmanifest",
@@ -51,6 +51,7 @@ def test_extension_manifest_is_local_and_complete() -> None:
     assert manifest["id"] == "thox-hermes-suite"
     assert manifest["name"] == "THOX Hermes Suite"
     assert manifest["permissions"] == {"storage": {"owned": True}}
+    assert manifest["scripts"] == ["thox-app.js", "thox-launch-context.js"]
 
     assets = [*manifest["scripts"], *manifest["stylesheets"]]
     assert assets
@@ -70,7 +71,7 @@ def test_extension_manifest_is_local_and_complete() -> None:
 
 def test_thox_brand_contract_and_safe_defaults() -> None:
     css = _read(EXTENSION / "thox-brand.css")
-    script = _read(EXTENSION / "thox-brand.js")
+    script = _read(EXTENSION / "thox-app.js")
     launch_context = _read(EXTENSION / "thox-launch-context.js")
 
     for token in ("#050806", "#10b981", "#00ff88", "Inter", "JetBrains Mono"):
@@ -87,6 +88,9 @@ def test_thox_brand_contract_and_safe_defaults() -> None:
         assert agent_id in script
 
     assert 'getSetting("agent_autosend", false)' in script
+    assert 'querySelector("#appTitlebarTitle")' in script
+    assert "MutationObserver" not in script, "Branding must not rewrite dynamic conversation content"
+    assert "createTreeWalker" not in script, "Branding must remain scoped to known chrome nodes"
     assert "X-Hermes-CSRF-Token" not in script, "Extension must not replace core CSRF behavior"
     assert "localStorage.clear" not in script
     assert "eval(" not in script
