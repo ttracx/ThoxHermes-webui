@@ -1,0 +1,78 @@
+name: THOX Hermes Suite
+
+on:
+  pull_request:
+    paths:
+      - "thox/**"
+      - "tests/test_thox_suite.py"
+      - "ecosystem_map.md"
+      - "mvp_catalog.md"
+      - "development_queue.md"
+      - ".github/workflows/thox-suite.yml"
+  push:
+    branches:
+      - master
+    paths:
+      - "thox/**"
+      - "tests/test_thox_suite.py"
+      - "ecosystem_map.md"
+      - "mvp_catalog.md"
+      - "development_queue.md"
+      - ".github/workflows/thox-suite.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: thox-hermes-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate THOX product layer
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: thox/vercel/package.json
+
+      - name: Install Python test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Validate launcher syntax
+        shell: bash
+        run: |
+          bash -n thox/start-thox.sh
+          pwsh -NoLogo -NoProfile -Command '$tokens = $null; $errors = $null; [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path "thox/start-thox.ps1"), [ref]$tokens, [ref]$errors) | Out-Null; if ($errors.Count -gt 0) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }'
+
+      - name: Run THOX contract tests
+        run: python -m pytest tests/test_thox_suite.py -q
+
+      - name: Validate gateway JavaScript
+        working-directory: thox/vercel
+        run: npm test
+
+      - name: Build Vercel gateway
+        working-directory: thox/vercel
+        run: npm run build
+
+      - name: Verify deterministic output
+        run: |
+          test -f thox/vercel/dist/index.html
+          test -f thox/vercel/dist/styles.css
+          test -f thox/vercel/dist/app.js
+          test -f thox/vercel/dist/thox-mark.svg
