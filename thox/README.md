@@ -156,11 +156,11 @@ The gateway can still launch an endpoint when its health probe is blocked by COR
 Run the THOX-specific checks from the repository root:
 
 ```bash
-python -m pytest tests/test_thox_suite.py -q
+python -m pytest thox/tests/test_thox_suite.py -q
 cd thox/vercel && npm test && npm run build
 ```
 
-The validation suite checks required files, manifest safety, local-only gateway behavior, security headers and JavaScript syntax.
+The validation suite checks required files, manifest safety, local-only gateway behavior, security headers and JavaScript syntax without starting the upstream test server.
 
 ## Living architecture documents
 
