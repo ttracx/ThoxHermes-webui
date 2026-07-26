@@ -6,7 +6,8 @@
   "author": "THOX.ai LLC",
   "homepage": "https://www.thox.ai",
   "scripts": [
-    "thox-brand.js"
+    "thox-brand.js",
+    "thox-launch-context.js"
   ],
   "stylesheets": [
     "thox-brand.css"
