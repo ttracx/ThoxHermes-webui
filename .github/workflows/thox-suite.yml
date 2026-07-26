@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - "thox/**"
-      - "tests/test_thox_suite.py"
       - "ecosystem_map.md"
       - "mvp_catalog.md"
       - "development_queue.md"
@@ -14,7 +13,6 @@ on:
       - master
     paths:
       - "thox/**"
-      - "tests/test_thox_suite.py"
       - "ecosystem_map.md"
       - "mvp_catalog.md"
       - "development_queue.md"
@@ -61,7 +59,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python -m pytest tests/test_thox_suite.py -q --tb=short 2>&1 | tee thox-test-report.txt
+          python -m pytest thox/tests/test_thox_suite.py -q --tb=short 2>&1 | tee thox-test-report.txt
 
       - name: Upload THOX test report
         if: always()
