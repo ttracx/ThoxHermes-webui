@@ -15,7 +15,7 @@ The extension is deliberately isolated from upstream Hermes core. This keeps the
 Linux, macOS, or WSL:
 
 ```bash
-./thox-start.sh
+bash ./thox-start.sh
 ```
 
 Windows PowerShell:
