@@ -1,0 +1,47 @@
+{
+  "id": "thox-hermes",
+  "name": "THOX Hermes Command Fabric",
+  "version": "0.1.0",
+  "description": "THOX.ai branding, DigitalHuman orchestration, internal-agent operations, device fleet views, and edge-runtime controls for Hermes WebUI.",
+  "scripts": ["assets/thox-hermes.js"],
+  "stylesheets": ["assets/thox-hermes.css"],
+  "permissions": {
+    "storage": {
+      "owned": true
+    }
+  },
+  "settings_schema": [
+    {
+      "key": "sidecar_origin",
+      "type": "string",
+      "label": "Local THOX sidecar origin",
+      "default": "http://127.0.0.1:17789"
+    },
+    {
+      "key": "default_device_mode",
+      "type": "enum",
+      "label": "Default device mode",
+      "options": [
+        {"value": "web", "label": "Web / desktop"},
+        {"value": "thoxnova", "label": "ThoxNova"},
+        {"value": "thoxmini", "label": "ThoxMini"},
+        {"value": "thoxmini-air", "label": "ThoxMini Air"},
+        {"value": "thoxclip", "label": "ThoxClip"},
+        {"value": "thoxkey", "label": "ThoxKey"}
+      ],
+      "default": "web"
+    },
+    {
+      "key": "compact_metrics",
+      "type": "boolean",
+      "label": "Use compact metric cards",
+      "default": false
+    }
+  ],
+  "sidecar": {
+    "type": "loopback",
+    "origin": "http://127.0.0.1:17789",
+    "health_path": "/health",
+    "proxy_auth": "token-v1"
+  }
+}
