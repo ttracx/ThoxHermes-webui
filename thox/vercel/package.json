@@ -1,0 +1,13 @@
+{
+  "name": "thox-hermes-device-launcher",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --check app.js && node --check build.mjs && node --check ../extensions/thox-hermes/thox-app.js && node --check ../extensions/thox-hermes/thox-launch-context.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

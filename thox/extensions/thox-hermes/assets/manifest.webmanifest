@@ -1,0 +1,37 @@
+{
+  "id": "./",
+  "name": "THOX Hermes",
+  "short_name": "THOX Hermes",
+  "description": "Local-first THOX.ai DigitalHuman and internal agent workspace.",
+  "start_url": "./?source=pwa&device=auto",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#050806",
+  "theme_color": "#050806",
+  "orientation": "any",
+  "categories": ["productivity", "utilities", "business"],
+  "shortcuts": [
+    {
+      "name": "New THOX Hermes session",
+      "short_name": "New session",
+      "description": "Open THOX Hermes ready for a new DigitalHuman or internal-agent session.",
+      "url": "./?source=pwa&action=new-chat&device=auto",
+      "icons": [
+        {
+          "src": "thox-mark.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "icons": [
+    {
+      "src": "thox-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable monochrome"
+    }
+  ]
+}

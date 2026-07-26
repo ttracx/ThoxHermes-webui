@@ -1,0 +1,49 @@
+{
+  "id": "thox-hermes-suite",
+  "name": "THOX Hermes Suite",
+  "version": "1.0.0",
+  "description": "THOX.ai branding, DigitalHuman launch surfaces, internal-agent controls, and adaptive device profiles for Hermes WebUI.",
+  "author": "THOX.ai LLC",
+  "homepage": "https://www.thox.ai",
+  "scripts": [
+    "thox-app.js",
+    "thox-launch-context.js"
+  ],
+  "stylesheets": [
+    "thox-brand.css"
+  ],
+  "permissions": {
+    "storage": {
+      "owned": true
+    }
+  },
+  "settings_schema": [
+    {
+      "key": "device_profile",
+      "type": "enum",
+      "label": "THOX device profile",
+      "options": [
+        {"value": "auto", "label": "Automatic"},
+        {"value": "nova", "label": "ThoxNova"},
+        {"value": "mini", "label": "ThoxMini"},
+        {"value": "mini-air", "label": "ThoxMini Air"},
+        {"value": "clip", "label": "ThoxClip"},
+        {"value": "key", "label": "ThoxKey"},
+        {"value": "watch", "label": "ThoxWatch"}
+      ],
+      "default": "auto"
+    },
+    {
+      "key": "show_launcher",
+      "type": "boolean",
+      "label": "Show THOX launcher",
+      "default": true
+    },
+    {
+      "key": "agent_autosend",
+      "type": "boolean",
+      "label": "Send agent activation prompts immediately",
+      "default": false
+    }
+  ]
+}

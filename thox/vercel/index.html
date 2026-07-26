@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050806">
+  <meta name="description" content="Securely launch THOX Hermes DigitalHuman and internal-agent workspaces across THOX devices.">
+  <title>THOX Hermes Device Gateway</title>
+  <link rel="icon" href="./thox-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="THOX Hermes home">
+      <img src="./thox-mark.svg" alt="">
+      <span>
+        <strong>THOX Hermes</strong>
+        <small>Device Gateway</small>
+      </span>
+    </a>
+    <div class="privacy"><span></span>Local-first control plane</div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="overline">DigitalHumans · Internal Agents · Device Apps</p>
+        <h1 id="hero-title">Your agents, available wherever you THOX.</h1>
+        <p class="lead">Connect to the THOX Hermes instance running on your trusted device. The gateway stores the endpoint only in this browser and never stores your conversations, memory, files, or model credentials.</p>
+      </div>
+
+      <form class="connection" id="connectionForm" novalidate>
+        <label for="endpoint">THOX Hermes endpoint</label>
+        <div class="endpoint-row">
+          <input id="endpoint" name="endpoint" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://hermes.your-thox-device.example" required>
+          <button class="primary" type="submit">Connect</button>
+        </div>
+        <div class="connection-meta">
+          <div class="status" id="status" data-state="idle" role="status" aria-live="polite">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="statusText">No endpoint selected</span>
+          </div>
+          <button class="text-button" id="clearEndpoint" type="button">Clear saved endpoint</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="workspace" aria-labelledby="workspace-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="workspace-title">Choose a device experience</h2>
+          <p>The same THOX design system adapts density, touch targets, and navigation for every device profile.</p>
+        </div>
+        <span class="keyboard">⌘/Ctrl + Enter to launch</span>
+      </div>
+
+      <div class="device-grid" id="deviceGrid">
+        <button class="device selected" type="button" data-profile="auto" aria-pressed="true">
+          <span class="device-code">AUTO</span>
+          <strong>Automatic</strong>
+          <small>Match this screen and input mode.</small>
+        </button>
+        <button class="device" type="button" data-profile="nova" aria-pressed="false">
+          <span class="device-code">NOVA</span>
+          <strong>ThoxNova</strong>
+          <small>Full three-panel agent workstation.</small>
+        </button>
+        <button class="device" type="button" data-profile="mini" aria-pressed="false">
+          <span class="device-code">MINI</span>
+          <strong>ThoxMini</strong>
+          <small>Compact portable workspace.</small>
+        </button>
+        <button class="device" type="button" data-profile="mini-air" aria-pressed="false">
+          <span class="device-code">AIR</span>
+          <strong>ThoxMini Air</strong>
+          <small>Touch-forward wireless assistant.</small>
+        </button>
+        <button class="device" type="button" data-profile="clip" aria-pressed="false">
+          <span class="device-code">CLIP</span>
+          <strong>ThoxClip</strong>
+          <small>Fast actions and mobile handoff.</small>
+        </button>
+        <button class="device" type="button" data-profile="key" aria-pressed="false">
+          <span class="device-code">KEY</span>
+          <strong>ThoxKey</strong>
+          <small>Portable workspace and recovery mode.</small>
+        </button>
+        <button class="device" type="button" data-profile="watch" aria-pressed="false">
+          <span class="device-code">WATCH</span>
+          <strong>ThoxWatch</strong>
+          <small>Minimal voice and quick-command mode.</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="agents" aria-labelledby="agents-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="agents-title">Start with an agent</h2>
+          <p>Launch THOX Hermes with a prepared activation prompt for the selected DigitalHuman or internal specialist.</p>
+        </div>
+      </div>
+
+      <div class="agent-list" id="agentList">
+        <button class="agent selected" type="button" data-agent="sadie-weaving" aria-pressed="true">
+          <span class="agent-avatar">SW</span>
+          <span><strong>Sadie Weaving</strong><small>Chief Agentic Officer</small></span>
+        </button>
+        <button class="agent" type="button" data-agent="internal-orchestrator" aria-pressed="false">
+          <span class="agent-avatar">AO</span>
+          <span><strong>Agent Orchestrator</strong><small>Parallel team routing</small></span>
+        </button>
+        <button class="agent" type="button" data-agent="device-engineer" aria-pressed="false">
+          <span class="agent-avatar">DE</span>
+          <span><strong>Device Engineer</strong><small>Hardware and fabrication</small></span>
+        </button>
+        <button class="agent" type="button" data-agent="platform-engineer" aria-pressed="false">
+          <span class="agent-avatar">PE</span>
+          <span><strong>Platform Engineer</strong><small>Runtime and infrastructure</small></span>
+        </button>
+        <button class="agent" type="button" data-agent="customer-experience" aria-pressed="false">
+          <span class="agent-avatar">CX</span>
+          <span><strong>Experience Fabric</strong><small>Customer and UX systems</small></span>
+        </button>
+        <button class="agent" type="button" data-agent="none" aria-pressed="false">
+          <span class="agent-avatar">—</span>
+          <span><strong>Open normally</strong><small>No activation prompt</small></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="launch-panel" aria-label="Launch THOX Hermes">
+      <div>
+        <span class="launch-label">Selected workspace</span>
+        <strong id="selectionSummary">Automatic · Sadie Weaving</strong>
+        <small id="launchUrl">Configure a trusted THOX Hermes endpoint above.</small>
+      </div>
+      <div class="launch-actions">
+        <button class="secondary" id="copyLink" type="button">Copy link</button>
+        <button class="primary" id="launchButton" type="button" disabled>Launch THOX Hermes</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>THOX.ai LLC</span>
+    <span>Your AI. Your Data. Your Rules.</span>
+  </footer>
+</body>
+</html>

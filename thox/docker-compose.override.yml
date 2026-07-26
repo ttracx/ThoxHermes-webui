@@ -1,0 +1,11 @@
+# THOX Hermes overlay for the upstream single-container docker-compose.yml.
+# Usage:
+#   docker compose -f docker-compose.yml -f thox/docker-compose.override.yml up -d --build
+
+services:
+  hermes-webui:
+    volumes:
+      - ./thox/extensions:/opt/hermes-webui/thox/extensions:ro
+    environment:
+      - HERMES_WEBUI_EXTENSION_DIR=/opt/hermes-webui/thox/extensions
+      - HERMES_WEBUI_EXTENSION_MANIFEST=thox-hermes/manifest.json

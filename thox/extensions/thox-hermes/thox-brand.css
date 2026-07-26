@@ -1,0 +1,620 @@
+/*
+ * THOX Hermes Suite — visual system overlay
+ * Keeps upstream Hermes selectors and protocol identifiers intact while applying
+ * THOX.ai presentation, accessibility, device density, and launcher surfaces.
+ */
+
+:root {
+  --thox-black: #050806;
+  --thox-black-soft: #080d0a;
+  --thox-surface: #0b120e;
+  --thox-surface-raised: #0f1813;
+  --thox-surface-hover: #142019;
+  --thox-emerald: #10b981;
+  --thox-emerald-bright: #00ff88;
+  --thox-emerald-soft: #34d399;
+  --thox-text: #f5fff9;
+  --thox-text-muted: #94a99c;
+  --thox-border: rgba(52, 211, 153, 0.18);
+  --thox-border-strong: rgba(0, 255, 136, 0.42);
+  --thox-danger: #fb7185;
+  --thox-warning: #fbbf24;
+  --thox-info: #38bdf8;
+  --thox-radius-sm: 8px;
+  --thox-radius-md: 12px;
+  --thox-radius-lg: 18px;
+  --thox-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  --thox-focus: 0 0 0 3px rgba(0, 255, 136, 0.24);
+  --thox-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --thox-font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --thox-density: 1;
+  color-scheme: dark;
+}
+
+html.thox-hermes,
+html.thox-hermes.dark {
+  --bg: var(--thox-black);
+  --sidebar: #070b08;
+  --surface: var(--thox-surface);
+  --surface-hover: var(--thox-surface-hover);
+  --border: var(--thox-border);
+  --text: var(--thox-text);
+  --text-muted: var(--thox-text-muted);
+  --accent: var(--thox-emerald-bright);
+  --accent-hover: var(--thox-emerald-soft);
+  --primary: var(--thox-emerald-bright);
+  --primary-hover: var(--thox-emerald-soft);
+  background: var(--thox-black);
+}
+
+html.thox-hermes body {
+  font-family: var(--thox-font-sans);
+  color: var(--thox-text);
+  background:
+    radial-gradient(circle at 72% -15%, rgba(0, 255, 136, 0.08), transparent 34rem),
+    radial-gradient(circle at -10% 90%, rgba(16, 185, 129, 0.06), transparent 30rem),
+    var(--thox-black);
+  letter-spacing: -0.006em;
+}
+
+html.thox-hermes code,
+html.thox-hermes pre,
+html.thox-hermes kbd,
+html.thox-hermes samp,
+html.thox-hermes .mono,
+html.thox-hermes .model-name,
+html.thox-hermes .token-count {
+  font-family: var(--thox-font-mono);
+}
+
+html.thox-hermes ::selection {
+  color: #00190d;
+  background: var(--thox-emerald-bright);
+}
+
+html.thox-hermes :focus-visible {
+  outline: 1px solid var(--thox-emerald-bright) !important;
+  outline-offset: 2px;
+  box-shadow: var(--thox-focus);
+}
+
+/* Primary shell */
+html.thox-hermes .app-titlebar,
+html.thox-hermes header[role="banner"] {
+  border-bottom: 1px solid var(--thox-border);
+  background: rgba(5, 8, 6, 0.9);
+  backdrop-filter: blur(18px) saturate(125%);
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+}
+
+html.thox-hermes .app-titlebar-inner {
+  gap: 9px;
+  font-family: var(--thox-font-mono);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+html.thox-hermes .app-titlebar-icon img,
+html.thox-hermes .thox-titlebar-mark {
+  width: 19px;
+  height: 19px;
+  border-radius: 5px;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.34));
+}
+
+html.thox-hermes .sidebar,
+html.thox-hermes aside,
+html.thox-hermes [class*="sidebar"] {
+  border-color: var(--thox-border);
+}
+
+html.thox-hermes .sidebar {
+  background: linear-gradient(180deg, rgba(8, 13, 10, 0.98), rgba(5, 8, 6, 0.98));
+}
+
+html.thox-hermes .workspace-panel,
+html.thox-hermes [class*="workspace-panel"] {
+  border-left-color: var(--thox-border);
+  background: rgba(7, 11, 8, 0.96);
+}
+
+/* Controls */
+html.thox-hermes button,
+html.thox-hermes input,
+html.thox-hermes textarea,
+html.thox-hermes select {
+  font-family: var(--thox-font-sans);
+}
+
+html.thox-hermes button {
+  transition: border-color 140ms ease, background 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+html.thox-hermes button:hover:not(:disabled) {
+  border-color: var(--thox-border-strong);
+}
+
+html.thox-hermes button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+html.thox-hermes input,
+html.thox-hermes textarea,
+html.thox-hermes select,
+html.thox-hermes [contenteditable="true"] {
+  color: var(--thox-text);
+  border-color: var(--thox-border);
+  background: rgba(11, 18, 14, 0.92);
+  caret-color: var(--thox-emerald-bright);
+}
+
+html.thox-hermes input::placeholder,
+html.thox-hermes textarea::placeholder {
+  color: #728279;
+}
+
+html.thox-hermes .btn-primary,
+html.thox-hermes button.primary,
+html.thox-hermes [class*="send-btn"],
+html.thox-hermes #sendBtn {
+  color: #00170c;
+  border-color: rgba(0, 255, 136, 0.62);
+  background: linear-gradient(135deg, var(--thox-emerald-soft), var(--thox-emerald-bright));
+  box-shadow: 0 7px 24px rgba(0, 255, 136, 0.14);
+  font-weight: 750;
+}
+
+html.thox-hermes .btn-primary:hover,
+html.thox-hermes button.primary:hover,
+html.thox-hermes [class*="send-btn"]:hover,
+html.thox-hermes #sendBtn:hover {
+  background: linear-gradient(135deg, #6ee7b7, #25ff9b);
+}
+
+/* Composer and messages */
+html.thox-hermes .composer,
+html.thox-hermes [class*="composer"] {
+  border-color: var(--thox-border);
+}
+
+html.thox-hermes .composer-footer,
+html.thox-hermes [class*="composer-footer"] {
+  color: var(--thox-text-muted);
+}
+
+html.thox-hermes .message,
+html.thox-hermes [class*="message-row"] {
+  scroll-margin-top: 72px;
+}
+
+html.thox-hermes .message.assistant,
+html.thox-hermes [data-role="assistant"] {
+  --message-accent: var(--thox-emerald);
+}
+
+html.thox-hermes .message.user,
+html.thox-hermes [data-role="user"] {
+  --message-accent: #6ee7b7;
+}
+
+html.thox-hermes .tool-call-card,
+html.thox-hermes [class*="tool-card"],
+html.thox-hermes [class*="approval-card"],
+html.thox-hermes [class*="reasoning-card"] {
+  border-color: var(--thox-border);
+  background: linear-gradient(145deg, rgba(15, 24, 19, 0.94), rgba(8, 13, 10, 0.94));
+  box-shadow: inset 3px 0 0 rgba(0, 255, 136, 0.34);
+}
+
+html.thox-hermes a {
+  color: var(--thox-emerald-soft);
+  text-decoration-color: rgba(52, 211, 153, 0.42);
+}
+
+html.thox-hermes a:hover {
+  color: var(--thox-emerald-bright);
+}
+
+html.thox-hermes hr {
+  border-color: var(--thox-border);
+}
+
+html.thox-hermes table th {
+  color: var(--thox-emerald-soft);
+  font-family: var(--thox-font-mono);
+  letter-spacing: 0.03em;
+}
+
+html.thox-hermes table th,
+html.thox-hermes table td {
+  border-color: var(--thox-border);
+}
+
+html.thox-hermes pre {
+  border: 1px solid var(--thox-border);
+  background: #020503 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+/* THOX launcher */
+.thox-launcher-button {
+  position: fixed;
+  z-index: 2147483000;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  overflow: hidden;
+  color: #00170c;
+  border: 1px solid rgba(0, 255, 136, 0.7);
+  border-radius: 16px;
+  background: linear-gradient(145deg, #34d399, #00ff88);
+  box-shadow: 0 16px 46px rgba(0, 0, 0, 0.46), 0 0 28px rgba(0, 255, 136, 0.16);
+  cursor: pointer;
+}
+
+.thox-launcher-button img {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+}
+
+.thox-launcher-button[aria-expanded="true"] {
+  transform: rotate(2deg) scale(0.96);
+}
+
+.thox-command-center {
+  position: fixed;
+  z-index: 2147482999;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(max(16px, env(safe-area-inset-bottom)) + 64px);
+  width: min(430px, calc(100vw - 32px));
+  max-height: min(720px, calc(100dvh - 110px));
+  overflow: auto;
+  color: var(--thox-text);
+  border: 1px solid var(--thox-border-strong);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 95% 0%, rgba(0, 255, 136, 0.11), transparent 16rem),
+    rgba(5, 8, 6, 0.97);
+  box-shadow: var(--thox-shadow);
+  backdrop-filter: blur(22px) saturate(125%);
+  -webkit-backdrop-filter: blur(22px) saturate(125%);
+  transform-origin: bottom right;
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+}
+
+.thox-command-center[hidden] {
+  display: block !important;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.97);
+}
+
+.thox-command-center__header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid var(--thox-border);
+  background: rgba(5, 8, 6, 0.92);
+  backdrop-filter: blur(16px);
+}
+
+.thox-command-center__identity {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+}
+
+.thox-command-center__identity img {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+}
+
+.thox-command-center__title {
+  margin: 0;
+  font-size: 0.94rem;
+  font-weight: 780;
+  letter-spacing: 0.01em;
+}
+
+.thox-command-center__subtitle {
+  margin: 2px 0 0;
+  color: var(--thox-text-muted);
+  font-family: var(--thox-font-mono);
+  font-size: 0.67rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.thox-command-center__close {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  color: var(--thox-text-muted);
+  border: 1px solid var(--thox-border);
+  border-radius: 10px;
+  background: rgba(15, 24, 19, 0.72);
+  cursor: pointer;
+}
+
+.thox-command-center__body {
+  padding: 16px;
+}
+
+.thox-section + .thox-section {
+  margin-top: 20px;
+}
+
+.thox-section__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 9px;
+  color: var(--thox-text-muted);
+  font-family: var(--thox-font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.thox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.thox-action {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 78px;
+  padding: 12px;
+  color: var(--thox-text);
+  text-align: left;
+  border: 1px solid var(--thox-border);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(15, 24, 19, 0.82), rgba(8, 13, 10, 0.82));
+  cursor: pointer;
+}
+
+.thox-action:hover {
+  border-color: var(--thox-border-strong);
+  background: linear-gradient(145deg, rgba(20, 32, 25, 0.94), rgba(10, 17, 13, 0.94));
+  transform: translateY(-1px);
+}
+
+.thox-action__icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  color: var(--thox-emerald-bright);
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  border-radius: 9px;
+  background: rgba(0, 255, 136, 0.07);
+  font-family: var(--thox-font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.thox-action__copy {
+  min-width: 0;
+}
+
+.thox-action__label {
+  display: block;
+  font-size: 0.79rem;
+  font-weight: 720;
+  line-height: 1.2;
+}
+
+.thox-action__description {
+  display: block;
+  margin-top: 4px;
+  color: var(--thox-text-muted);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.thox-device-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.thox-device-chip {
+  min-height: 34px;
+  padding: 7px 10px;
+  color: var(--thox-text-muted);
+  border: 1px solid var(--thox-border);
+  border-radius: 10px;
+  background: rgba(11, 18, 14, 0.78);
+  font-family: var(--thox-font-mono);
+  font-size: 0.67rem;
+  cursor: pointer;
+}
+
+.thox-device-chip[aria-pressed="true"] {
+  color: #00170c;
+  border-color: var(--thox-emerald-bright);
+  background: var(--thox-emerald-bright);
+  font-weight: 800;
+}
+
+.thox-status {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 9px;
+  margin-top: 12px;
+  padding: 10px 11px;
+  color: var(--thox-text-muted);
+  border: 1px solid var(--thox-border);
+  border-radius: 12px;
+  background: rgba(8, 13, 10, 0.7);
+  font-family: var(--thox-font-mono);
+  font-size: 0.66rem;
+}
+
+.thox-status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--thox-warning);
+  box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.08);
+}
+
+.thox-status[data-state="online"] .thox-status__dot {
+  background: var(--thox-emerald-bright);
+  box-shadow: 0 0 0 4px rgba(0, 255, 136, 0.09), 0 0 12px rgba(0, 255, 136, 0.42);
+}
+
+.thox-status[data-state="offline"] .thox-status__dot {
+  background: var(--thox-danger);
+  box-shadow: 0 0 0 4px rgba(251, 113, 133, 0.09);
+}
+
+.thox-toast-region {
+  position: fixed;
+  z-index: 2147483001;
+  right: max(16px, env(safe-area-inset-right));
+  top: max(16px, env(safe-area-inset-top));
+  display: grid;
+  width: min(360px, calc(100vw - 32px));
+  gap: 8px;
+  pointer-events: none;
+}
+
+.thox-toast {
+  padding: 11px 13px;
+  color: var(--thox-text);
+  border: 1px solid var(--thox-border-strong);
+  border-radius: 12px;
+  background: rgba(5, 8, 6, 0.94);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.34);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  animation: thox-toast-in 180ms ease both;
+}
+
+@keyframes thox-toast-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Device profiles */
+html.thox-hermes[data-thox-device="mini"],
+html.thox-hermes[data-thox-device="key"] {
+  --thox-density: 0.9;
+}
+
+html.thox-hermes[data-thox-device="mini"] .thox-command-center,
+html.thox-hermes[data-thox-device="key"] .thox-command-center {
+  width: min(390px, calc(100vw - 24px));
+}
+
+html.thox-hermes[data-thox-device="mini-air"],
+html.thox-hermes[data-thox-device="clip"] {
+  --thox-density: 1.08;
+}
+
+html.thox-hermes[data-thox-device="mini-air"] button,
+html.thox-hermes[data-thox-device="clip"] button {
+  min-height: 40px;
+}
+
+html.thox-hermes[data-thox-device="watch"] .sidebar,
+html.thox-hermes[data-thox-device="watch"] .workspace-panel,
+html.thox-hermes[data-thox-device="watch"] [class*="workspace-panel"] {
+  display: none !important;
+}
+
+html.thox-hermes[data-thox-device="watch"] .thox-command-center {
+  inset: 8px;
+  width: auto;
+  max-height: calc(100dvh - 16px);
+  border-radius: 20px;
+}
+
+html.thox-hermes[data-thox-device="watch"] .thox-grid {
+  grid-template-columns: 1fr;
+}
+
+html.thox-hermes[data-thox-device="watch"] .thox-action {
+  min-height: 62px;
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+  .thox-launcher-button {
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+  }
+
+  .thox-launcher-button img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .thox-command-center {
+    right: max(10px, env(safe-area-inset-right));
+    bottom: calc(max(10px, env(safe-area-inset-bottom)) + 58px);
+    width: calc(100vw - 20px);
+    max-height: calc(100dvh - 88px);
+    border-radius: 19px;
+  }
+
+  .thox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .thox-action {
+    min-height: 66px;
+  }
+}
+
+@media (max-width: 390px) {
+  .thox-command-center__body {
+    padding: 12px;
+  }
+
+  .thox-command-center__header {
+    padding: 14px 14px 12px;
+  }
+
+  .thox-device-chip {
+    flex: 1 1 calc(50% - 7px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.thox-hermes *,
+  html.thox-hermes *::before,
+  html.thox-hermes *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
