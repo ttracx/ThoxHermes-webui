@@ -1,0 +1,31 @@
+name: THOX Control Plane
+
+on:
+  pull_request:
+    paths:
+      - "apps/thox-control-plane/**"
+      - ".github/workflows/thox-control-plane.yml"
+  push:
+    branches: [master]
+    paths:
+      - "apps/thox-control-plane/**"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate JavaScript syntax
+        run: node --check apps/thox-control-plane/app.js
+      - name: Validate Vercel JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('apps/thox-control-plane/vercel.json','utf8'))"
+      - name: Validate THOX extension JavaScript
+        run: node --check extensions/thox-hermes/assets/thox-hermes.js
+      - name: Test THOX sidecar
+        run: python3 -m unittest extensions/thox-hermes/sidecar/test_server.py -v
