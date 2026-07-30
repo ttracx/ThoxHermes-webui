@@ -15,7 +15,8 @@
 > It ships the **THOX design system** as the default `thox` skin — zinc-first surfaces, emerald `#10B981` +
 > neon `#00FF88` accents, Inter + JetBrains Mono, dark-mode-first, WCAG AA — shared with
 > [ThoxHermes-studio](https://github.com/ttracx/ThoxHermes-studio). It is the **end-user Hermes chat/agent
-> surface**. See [`THOX_THEME.md`](THOX_THEME.md) and [`NOTICE.thox.md`](NOTICE.thox.md). All upstream
+> surface**. Hermes Agent wiring: [`THOX_HERMES.md`](THOX_HERMES.md) + [`.env.thox.example`](.env.thox.example).
+> Design system: [`THOX_THEME.md`](THOX_THEME.md). Attribution: [`NOTICE.thox.md`](NOTICE.thox.md). All upstream
 > credit and the upstream MIT `LICENSE` are preserved.
 
 ---
