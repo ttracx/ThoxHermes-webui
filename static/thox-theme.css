@@ -1,0 +1,117 @@
+/* =====================================================================
+   ThoxHermes — THOX.ai design system for hermes-webui
+   ---------------------------------------------------------------------
+   A REAL THOX theme, not a color swap. Shipped as the "thox" SKIN so it
+   combines with the Theme (dark/light) axis, but it also overrides the
+   base surface/text tokens so the whole surface reads as ThoxOS:
+   zinc-first surfaces, emerald + neon accents, hairline borders,
+   Inter body + JetBrains Mono for code. Dark-mode-first, WCAG AA.
+
+   Shared token layer: the --thox-* custom properties below are the
+   single source of truth (identical set is consumed by ThoxHermes-studio).
+   The [data-skin="thox"] blocks map those tokens onto hermes-webui's
+   own variable names.
+   ===================================================================== */
+
+:root {
+  /* ---- THOX canonical brand tokens (shared source of truth) ---- */
+  --thox-emerald-500:#10B981;  /* primary accent */
+  --thox-emerald-400:#34D399;  /* hover / on-dark accent */
+  --thox-emerald-600:#059669;  /* pressed */
+  --thox-emerald-700:#047857;  /* light-mode accent */
+  --thox-neon:#00FF88;         /* glow / emphasis only */
+  --thox-bg:#09090B;           /* zinc-950 canvas */
+  --thox-surface:#18181B;      /* zinc-900 panels */
+  --thox-elevated:#27272A;     /* zinc-800 */
+  --thox-border:#27272A;
+  --thox-border-strong:#3F3F46;
+  --thox-hairline:rgba(255,255,255,.08);
+  --thox-text:#FAFAFA;
+  --thox-text-muted:#A1A1AA;
+  --thox-text-faint:#71717A;
+  --thox-info:#38BDF8;
+  --thox-warn:#FBBF24;
+  --thox-danger:#F87171;
+  --thox-font-sans:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --thox-font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  /* NOTE: purple (#a855f7/#c084fc) is RESERVED for MagStack — never used here. */
+}
+
+/* ===================== THOX skin — LIGHT variant ===================== */
+:root[data-skin="thox"] {
+  --bg:#F8FAF9;--sidebar:#EEF4F1;--surface:#FFFFFF;
+  --surface-subtle:rgba(0,0,0,.025);--surface-subtle-hover:rgba(0,0,0,.05);
+  --border:#CFDBD5;--border2:rgba(0,0,0,.15);--border-subtle:rgba(0,0,0,.08);--border-muted:rgba(0,0,0,.12);
+  --text:#17211C;--strong:#05130D;--muted:#5F7068;--em:#405149;
+  --accent:var(--thox-emerald-700);--accent-hover:#065F46;
+  --accent-bg:rgba(4,120,87,.08);--accent-bg-strong:rgba(4,120,87,.15);--accent-text:#047857;
+  --blue:#1D4ED8;--gold:#059669;--code-bg:#F1F5F3;
+  --topbar-bg:rgba(248,250,249,.98);--main-bg:rgba(248,250,249,.5);
+  --font-ui:var(--thox-font-sans);--font-mono:var(--thox-font-mono);
+}
+
+/* ===================== THOX skin — DARK variant (primary) ===================== */
+:root.dark[data-skin="thox"] {
+  --bg:var(--thox-bg);--sidebar:#0F0F12;--surface:var(--thox-surface);
+  --surface-subtle:rgba(255,255,255,.025);--surface-subtle-hover:rgba(255,255,255,.05);
+  --border:var(--thox-border);--border2:rgba(255,255,255,.14);
+  --border-subtle:rgba(255,255,255,.07);--border-muted:rgba(255,255,255,.12);
+  --text:var(--thox-text);--strong:#FFFFFF;--muted:var(--thox-text-muted);--em:#D4D4D8;
+  --accent:var(--thox-emerald-500);--accent-hover:var(--thox-emerald-400);
+  --accent-bg:rgba(16,185,129,.10);--accent-bg-strong:rgba(16,185,129,.18);--accent-text:var(--thox-emerald-400);
+  --blue:var(--thox-info);--gold:var(--thox-neon);--code-bg:#0B0B0D;
+  --topbar-bg:rgba(9,9,11,.98);--main-bg:rgba(9,9,11,.5);
+  --font-ui:var(--thox-font-sans);--font-mono:var(--thox-font-mono);
+}
+
+/* ===================== THOX component polish (both variants) =====================
+   A few targeted rules so the skin feels engineered/ThoxOS rather than merely
+   recolored: crisp typography, emerald focus rings, a neon-tinged primary send. */
+:root[data-skin="thox"] body {
+  font-family:var(--font-ui);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;
+}
+:root[data-skin="thox"] code,
+:root[data-skin="thox"] pre,
+:root[data-skin="thox"] textarea#msg,
+:root[data-skin="thox"] .app-titlebar-sub { font-family:var(--font-mono); }
+
+/* Emerald focus ring on interactive controls */
+:root[data-skin="thox"] :is(button,a,input,textarea,select):focus-visible {
+  outline:2px solid var(--accent);outline-offset:2px;
+}
+:root.dark[data-skin="thox"] .composer-box:focus-within,
+:root.dark[data-skin="thox"] textarea#msg:focus {
+  border-color:var(--accent)!important;
+  box-shadow:0 0 0 3px rgba(16,185,129,.14)!important;
+}
+
+/* Primary/send affordances get the emerald with a subtle neon lift on dark */
+:root.dark[data-skin="thox"] .send-btn,
+:root.dark[data-skin="thox"] button.primary,
+:root.dark[data-skin="thox"] .btn-primary {
+  background:var(--accent)!important;color:#04140C!important;border-color:var(--accent)!important;
+  box-shadow:0 0 18px rgba(16,185,129,.22);
+}
+:root.dark[data-skin="thox"] .send-btn:hover,
+:root.dark[data-skin="thox"] button.primary:hover,
+:root.dark[data-skin="thox"] .btn-primary:hover {
+  background:var(--accent-hover)!important;color:#04140C!important;
+}
+
+/* Active session / selection rail in THOX emerald */
+:root[data-skin="thox"] .session-item.active {
+  background:var(--accent-bg)!important;border:1px solid var(--accent-bg-strong)!important;
+}
+:root[data-skin="thox"] .session-item.active::before {
+  content:"";position:absolute;left:7px;top:12px;bottom:12px;width:2px;border-radius:999px;
+  background:var(--accent);box-shadow:0 0 6px rgba(16,185,129,.5);
+}
+
+/* Links and running tool cards pick up the emerald accent */
+:root[data-skin="thox"] .msg-body a { color:var(--accent-text)!important; }
+:root[data-skin="thox"] .tool-card-running {
+  background:var(--accent-bg)!important;border-color:var(--accent-bg-strong)!important;
+}
+
+/* The logo gradient already uses --accent, so the wordmark adapts automatically. */

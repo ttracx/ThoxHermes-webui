@@ -1,3 +1,25 @@
+<div align="center">
+
+# ThoxHermes WebUI
+
+**The THOX.ai-themed web UI for the Hermes Agent — chat with your self-hosted agent, THOX-branded.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-10B981.svg)](LICENSE)
+[![Theme: THOX.ai](https://img.shields.io/badge/theme-THOX.ai-00FF88?labelColor=09090B)](THOX_THEME.md)
+[![Upstream: hermes-webui](https://img.shields.io/badge/upstream-hermes--webui-FFD700?labelColor=09090B)](https://github.com/nesquena/hermes-webui)
+[![Stack: Python + vanilla JS](https://img.shields.io/badge/stack-Python%20%2B%20JS-3F3F46?labelColor=09090B)](#)
+
+</div>
+
+> **ThoxHermes WebUI** is a THOX.ai fork of [Hermes Web UI](https://github.com/nesquena/hermes-webui) (MIT).
+> It ships the **THOX design system** as the default `thox` skin — zinc-first surfaces, emerald `#10B981` +
+> neon `#00FF88` accents, Inter + JetBrains Mono, dark-mode-first, WCAG AA — shared with
+> [ThoxHermes-studio](https://github.com/ttracx/ThoxHermes-studio). It is the **end-user Hermes chat/agent
+> surface**. See [`THOX_THEME.md`](THOX_THEME.md) and [`NOTICE.thox.md`](NOTICE.thox.md). All upstream
+> credit and the upstream MIT `LICENSE` are preserved.
+
+---
+
 # Hermes Web UI
 
 [Hermes Agent](https://hermes-agent.nousresearch.com/) is a sophisticated autonomous agent that lives on your server, accessed via a terminal or messaging apps, that remembers what it learns and gets more capable the longer it runs.

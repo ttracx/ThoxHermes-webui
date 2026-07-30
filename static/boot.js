@@ -2633,6 +2633,7 @@ const _THEMES=[
   {name:'System', value:'system', colors:['#FEFCF7','#0D0D1A','#B8860B']},
 ];
 const _SKINS=[
+  {name:'THOX',     value:'thox', colors:['#10B981','#00FF88','#18181B']},
   {name:'Default',  colors:['#FFD700','#FFBF00','#CD7F32']},
   {name:'Ares',     colors:['#FF4444','#CC3333','#992222']},
   {name:'Mono',     colors:['#CCCCCC','#999999','#666666']},
