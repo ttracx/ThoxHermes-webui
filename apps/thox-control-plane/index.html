@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050706">
+  <meta name="description" content="THOX Hermes deployment and device control-plane landing surface.">
+  <title>THOX Hermes Control Plane</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="THOX Hermes home">
+      <span class="brand-mark" aria-hidden="true">TH</span>
+      <span>THOX Hermes</span>
+    </a>
+    <nav aria-label="Primary"><a href="#architecture">Architecture</a><a href="#devices">Devices</a><a href="#deploy">Deploy</a></nav>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>Private agent operations across every THOX device.</h1>
+        <p>One branded command fabric for DigitalHumans, internal Hermes agents, THOXCore inference, ThoxRoute, MeshStack, and device-native companion experiences.</p>
+        <div class="actions"><a class="button primary" href="#deploy">Deploy control plane</a><a class="button" href="#architecture">View architecture</a></div>
+      </div>
+      <div class="hero-console" aria-label="THOX Hermes status preview">
+        <div class="console-head"><span></span><span></span><span></span><strong>THOX Hermes Fabric</strong></div>
+        <div class="console-grid">
+          <article><span>DigitalHumans</span><strong>01</strong><small>Sadie Weaving ready</small></article>
+          <article><span>Internal agents</span><strong>04</strong><small>governed roles</small></article>
+          <article><span>Device classes</span><strong>07</strong><small>shared experience</small></article>
+          <article><span>Data posture</span><strong>LOCAL</strong><small>cloud only by policy</small></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="band">
+      <div><h2>Hybrid by design</h2><p>The local Hermes runtime, models, tools, sessions, and device telemetry remain on owner-controlled hardware. Vercel hosts only this public control-plane shell and deployment documentation unless an authenticated relay is explicitly added.</p></div>
+      <ol><li><strong>Experience layer</strong><span>THOX-branded Hermes WebUI extension and responsive device modes.</span></li><li><strong>Agent layer</strong><span>DigitalHumans and internal Hermes agent teams with governed roles.</span></li><li><strong>Runtime layer</strong><span>THOXCore, ThoxRoute, llama.cpp, Ollama, and approved fallback providers.</span></li><li><strong>Device layer</strong><span>MeshStack registry, local sidecar telemetry, and device-native companions.</span></li></ol>
+    </section>
+
+    <section id="devices" class="devices">
+      <div class="section-head"><h2>One system. Multiple device expressions.</h2><p>The same identity, privacy model, and operational controls adapt to each surface.</p></div>
+      <div class="device-list" id="deviceList"></div>
+    </section>
+
+    <section id="deploy" class="deploy">
+      <div><h2>Deployment boundary</h2><p>Deploy this static control-plane surface to Vercel. Run the actual Hermes agent, extension, and sidecar locally on THOX hardware or an owner-controlled server.</p></div>
+      <pre><code>vercel deploy apps/thox-control-plane
+vercel deploy apps/thox-control-plane --prod</code></pre>
+    </section>
+  </main>
+  <footer><span>THOX.ai</span><span>Your AI. Your Data. Your Rules.</span></footer>
+  <script src="./app.js"></script>
+</body>
+</html>
