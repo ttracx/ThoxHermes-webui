@@ -30,7 +30,7 @@ THOX Hermes is the owner-controlled command fabric for THOX DigitalHumans, inter
 | Web / desktop | Browser, macOS, Windows, Linux | Full Hermes three-panel UI plus THOX command fabric |
 | ThoxNova | 6-inch portrait touch slate | Narrower command shell, touch-first targets, full local operations |
 | ThoxMini | USB edge compute companion | Chat-first compact mode, device status, agent launch |
-| ThoxMini Air | Wireless edge companion | Compact status and MeshStack route visibility |
+| ThoxAir | Wireless edge companion | Compact status and MeshStack route visibility |
 | ThoxClip | Mobile accessory companion | Minimal command and context surface |
 | ThoxKey | Portable AI workspace | Workspace-first compact shell and portable session access |
 
