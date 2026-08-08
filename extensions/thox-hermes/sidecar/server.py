@@ -59,7 +59,7 @@ DEFAULT_STATE: dict[str, Any] = {
     "devices": [
         {"id": "thoxnova", "name": "ThoxNova", "class": "edge AI slate", "status": "unpaired", "channel": "local"},
         {"id": "thoxmini", "name": "ThoxMini", "class": "USB edge compute", "status": "unpaired", "channel": "USB-NCM"},
-        {"id": "thoxmini-air", "name": "ThoxMini Air", "class": "wireless edge assistant", "status": "unpaired", "channel": "Wi-Fi / BLE"},
+        {"id": "thoxmini-air", "name": "ThoxAir", "class": "wireless edge assistant", "status": "unpaired", "channel": "Wi-Fi / BLE"},
         {"id": "thoxclip", "name": "ThoxClip", "class": "MagSafe / Qi2 edge accessory", "status": "unpaired", "channel": "BLE"},
         {"id": "thoxkey", "name": "ThoxKey", "class": "portable AI workspace", "status": "unpaired", "channel": "USB"},
         {"id": "thoxwatch", "name": "ThoxWatch", "class": "wearable companion", "status": "unpaired", "channel": "BLE"},
