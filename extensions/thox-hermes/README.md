@@ -5,7 +5,7 @@ This first-party extension applies the THOX.ai design system to Hermes WebUI and
 - THOX DigitalHumans, including Sadie Weaving.
 - THOX Hermes internal agent teams.
 - ThoxRoute, THOXCore, MeshStack, local-model, and fallback route visibility.
-- Device fleet views for ThoxNova, ThoxMini, ThoxMini Air, ThoxClip, ThoxKey, ThoxWatch, and ThoxVault.
+- Device fleet views for ThoxNova, ThoxMini, ThoxAir, ThoxClip, ThoxKey, ThoxWatch, and ThoxVault.
 - Responsive device modes that preserve the same agent identity and controls across web, desktop, mobile, and embedded THOX surfaces.
 
 The extension is deliberately isolated from upstream Hermes core. This keeps the fork updateable while still making THOX the default branded experience when launched with the provided THOX scripts.
