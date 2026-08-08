@@ -5,10 +5,16 @@ on:
     paths:
       - "apps/thox-control-plane/**"
       - ".github/workflows/thox-control-plane.yml"
+      - "docs/THOX_HERMES.md"
+      - "ecosystem_map.md"
+      - "extensions/thox-hermes/**"
   push:
     branches: [master]
     paths:
       - "apps/thox-control-plane/**"
+      - "docs/THOX_HERMES.md"
+      - "ecosystem_map.md"
+      - "extensions/thox-hermes/**"
 
 permissions:
   contents: read
@@ -23,6 +29,13 @@ jobs:
           node-version: 22
       - name: Validate JavaScript syntax
         run: node --check apps/thox-control-plane/app.js
+      - name: Enforce canonical THOX product names
+        run: |
+          if grep -RIn --exclude-dir=.git --exclude='*.lock' 'ThoxMini Air' \
+            apps docs extensions README.md ecosystem_map.md mvp_catalog.md development_queue.md; then
+            echo "Use ThoxAir for display text; keep thoxmini-air only as a compatibility identifier."
+            exit 1
+          fi
       - name: Validate Vercel JSON
         run: node -e "JSON.parse(require('fs').readFileSync('apps/thox-control-plane/vercel.json','utf8'))"
       - name: Validate THOX extension JavaScript
