@@ -33,6 +33,8 @@ REPO = Path(__file__).resolve().parent.parent
 UI_JS = (REPO / "static" / "ui.js").read_text(encoding="utf-8")
 MESSAGES_JS = (REPO / "static" / "messages.js").read_text(encoding="utf-8")
 CSS = (REPO / "static" / "style.css").read_text(encoding="utf-8")
+THOX_THEME_CSS = (REPO / "static" / "thox-theme.css").read_text(encoding="utf-8")
+LOADED_SKIN_CSS = "\n".join((CSS, THOX_THEME_CSS))
 BOOT_JS = (REPO / "static" / "boot.js").read_text(encoding="utf-8")
 INDEX_HTML = (REPO / "static" / "index.html").read_text(encoding="utf-8")
 
@@ -113,17 +115,37 @@ def test_neon_skin_css_restored():
     assert ':root.dark[data-skin="neon"]' in CSS, "Neon dark variant CSS must be present"
 
 
-def test_every_registered_skin_has_css():
-    """Any skin offered in the picker (_SKINS in boot.js) must have a CSS block, so a
-    refactor cannot silently drop a shipped skin's styling while leaving it selectable."""
-    # Extract skin values registered in boot.js _SKINS = [ {name:'X', value:'y'}, ... ]
-    skins_block = re.search(r"_SKINS\s*=\s*\[(.*?)\]", BOOT_JS, re.DOTALL)
+def _registered_skins_missing_css(boot_js: str, loaded_css: str) -> list[str]:
+    """Return registered non-default skins absent from the stylesheets loaded by index.html."""
+    skins_block = re.search(r"_SKINS\s*=\s*\[(.*?)\]", boot_js, re.DOTALL)
     assert skins_block, "_SKINS registration not found in boot.js"
     values = set(re.findall(r"value\s*:\s*'([a-z0-9-]+)'", skins_block.group(1)))
-    # 'default'/'system' style entries have no data-skin CSS; only check non-default skins.
-    css_skins = set(re.findall(r'data-skin="([a-z0-9-]+)"', CSS))
-    missing = sorted(s for s in values if s and s not in css_skins and s not in {"default", "system", ""})
+    css_skins = set(re.findall(r'data-skin="([a-z0-9-]+)"', loaded_css))
+    return sorted(
+        skin
+        for skin in values
+        if skin and skin not in css_skins and skin not in {"default", "system", ""}
+    )
+
+
+def test_every_registered_skin_has_css():
+    """Every selectable skin must exist in one of the stylesheets index.html loads."""
+    assert 'href="static/style.css?v=__WEBUI_VERSION__"' in INDEX_HTML
+    assert 'href="static/thox-theme.css?v=__WEBUI_VERSION__"' in INDEX_HTML
+    missing = _registered_skins_missing_css(BOOT_JS, LOADED_SKIN_CSS)
     assert not missing, f"registered skins with no CSS block (silent breakage): {missing}"
+
+
+def test_registered_skin_without_css_is_still_rejected():
+    """Mutation guard: adding a picker entry without CSS must fail the coverage predicate."""
+    marker = "const _SKINS=["
+    assert marker in BOOT_JS, "_SKINS registration marker not found in boot.js"
+    mutated_boot = BOOT_JS.replace(
+        marker,
+        marker + "\n  {name:'Missing CSS probe', value:'missing-css-probe'},",
+        1,
+    )
+    assert _registered_skins_missing_css(mutated_boot, LOADED_SKIN_CSS) == ["missing-css-probe"]
 
 
 # ── FIX 4: settled tool-worklog rebuild must run while busy too (switch-back) ──
