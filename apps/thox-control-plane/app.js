@@ -3,7 +3,7 @@
   const devices = [
     ["ThoxNova", "Edge AI slate", "Full touch command surface"],
     ["ThoxMini", "USB edge compute", "Private portable agent runtime"],
-    ["ThoxMini Air", "Wireless edge assistant", "Mesh-connected companion"],
+    ["ThoxAir", "Wireless edge assistant", "Mesh-connected companion"],
     ["ThoxClip", "MagSafe / Qi2 accessory", "Context and sensor companion"],
     ["ThoxKey", "Portable AI workspace", "Owner-controlled agents and data"],
     ["ThoxWatch", "Wearable companion", "BLE status and action surface"],
