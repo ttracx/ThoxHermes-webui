@@ -25,7 +25,7 @@
     devices: [
       { id: "thoxnova", name: "ThoxNova", class: "edge AI slate", status: "unpaired", channel: "local" },
       { id: "thoxmini", name: "ThoxMini", class: "USB edge compute", status: "unpaired", channel: "USB-NCM" },
-      { id: "thoxmini-air", name: "ThoxMini Air", class: "wireless edge assistant", status: "unpaired", channel: "Wi-Fi / BLE" },
+      { id: "thoxmini-air", name: "ThoxAir", class: "wireless edge assistant", status: "unpaired", channel: "Wi-Fi / BLE" },
       { id: "thoxclip", name: "ThoxClip", class: "MagSafe / Qi2 edge accessory", status: "unpaired", channel: "BLE" },
       { id: "thoxkey", name: "ThoxKey", class: "portable AI workspace", status: "unpaired", channel: "USB" },
       { id: "thoxwatch", name: "ThoxWatch", class: "wearable companion", status: "unpaired", channel: "BLE" },
@@ -347,7 +347,7 @@
       web: "Web / desktop",
       thoxnova: "ThoxNova",
       thoxmini: "ThoxMini",
-      "thoxmini-air": "ThoxMini Air",
+      "thoxmini-air": "ThoxAir",
       thoxclip: "ThoxClip",
       thoxkey: "ThoxKey"
     };
@@ -366,7 +366,7 @@
       overview: renderOverview,
       "digital-humans": () => renderCollection("DigitalHuman roster", "Manage THOX DigitalHuman identities and open a governed Hermes session with the selected persona.", state.digital_humans, "human"),
       agents: () => renderCollection("Internal agent teams", "See the functional agents that support research, orchestration, implementation, review, and operations.", state.internal_agents, "agent"),
-      devices: () => renderCollection("THOX device fleet", "Keep one branded operating model across ThoxNova, ThoxMini, ThoxMini Air, ThoxClip, ThoxKey, ThoxWatch, and ThoxVault.", state.devices, "device"),
+      devices: () => renderCollection("THOX device fleet", "Keep one branded operating model across ThoxNova, ThoxMini, ThoxAir, ThoxClip, ThoxKey, ThoxWatch, and ThoxVault.", state.devices, "device"),
       routes: () => renderCollection("Inference and mesh routes", "Surface local inference, MeshStack connectivity, and explicitly configured fallback routes without exposing provider secrets.", state.routes, "route"),
       "device-modes": renderDeviceModes
     };

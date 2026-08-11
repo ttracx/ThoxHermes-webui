@@ -14,7 +14,7 @@ flowchart LR
   Sidecar --> MeshStack[MeshStack Device Registry]
   MeshStack --> Nova[ThoxNova]
   MeshStack --> Mini[ThoxMini]
-  MeshStack --> Air[ThoxMini Air]
+  MeshStack --> Air[ThoxAir]
   MeshStack --> Clip[ThoxClip]
   MeshStack --> Key[ThoxKey]
   MeshStack --> Watch[ThoxWatch]

@@ -25,7 +25,7 @@
         {"value": "web", "label": "Web / desktop"},
         {"value": "thoxnova", "label": "ThoxNova"},
         {"value": "thoxmini", "label": "ThoxMini"},
-        {"value": "thoxmini-air", "label": "ThoxMini Air"},
+        {"value": "thoxmini-air", "label": "ThoxAir"},
         {"value": "thoxclip", "label": "ThoxClip"},
         {"value": "thoxkey", "label": "ThoxKey"}
       ],
